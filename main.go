@@ -13,5 +13,4 @@ func main() {
 	userService.UserDeleteById()
 	userService.UserUpdateById()
 	userService.UserQueryById()
-	 
 }

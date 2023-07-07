@@ -1,0 +1,5 @@
+package config
+
+const(
+	ADD_USER string "/user/add"
+)
