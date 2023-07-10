@@ -1,16 +1,29 @@
 package handler
 import (
-	"github.com/liujiage/restapi/config"
+	"strconv"
+	"github.com/liujiage/restapi/service"
 	"github.com/gin-gonic/gin"
 )
 
+//api address
+const(
+	ADD_USER = "/user/add"
+	UPDATE_USER = "/user/update"
+	DELETE_USER = "/user/delete"
+	QUERY_USER = "/user/:id"
+)
 
+
+/****
+Start api http server
+****/
 func Start(){
 	router := gin.Default()
-	router.POST(config.ADD_USER, UserAdd)
-	router.DELETE("/user/delete/:id", UserDeleteById)
-	router.PUT("/user/update", UserUpdateById)
-	router.GET("/user/:id", UserQueryById)
-
-	router.Run("localhost:8080")
+	router.POST(ADD_USER, UserAdd)
+	router.DELETE(DELETE_USER, UserDeleteById)
+	router.PUT(UPDATE_USER, UserUpdateById)
+	router.GET(QUERY_USER, UserQueryById)
+    //get app config
+	config := service.GetConfig()
+	router.Run(config.Ip + ":" +strconv.Itoa(config.Port))
 }
