@@ -4,19 +4,19 @@ This is a demo project, It implements the sample REST API (CRUD) via pure Go lan
 <PRE>
 1. Design  
 user rquest -> handler   
+                 -> common 
+                 
                  -> service  
-                      ->common task, ConfigService(load properties file, and config backend server)  
+                      ->dao, access database task 
                           ->resource(app.properties)
-                      ->general task,UserService(access database)  
                       <-response  
                 <-response  
             <-response  
 
+common, database migration, load properties. 
 handler,  process user' reqeust, can call more then on services 
 service,  service, process a kind of task, include common and general services currently. in the future can split common service to a new package. 
-test, for unit test. the file name shuld be xxx_test.go
-demo, for studing and researching. 
-database, database migration, access database.
+test, for unit test. the file name shuld be xxx_test.go, some demo for researching 
 
 2. testing in development 
 go run main.go
