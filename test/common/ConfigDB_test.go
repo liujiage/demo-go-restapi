@@ -3,13 +3,13 @@ package database_test
 import (
 	"fmt"
 	"testing"
-	"github.com/liujiage/restapi/database"
+	"github.com/liujiage/restapi/common"
 )
 
-func TestStart_test(t *testing.T) {
+func TestDBHelper_test(t *testing.T) {
 	//dbHelper := database.GetDBHelper()
 	//fmt.Println(dbHelper.DB)
-	dbHelper2 := database.DBHelper{}
+	dbHelper2 := common.DBHelper{}
 	dbHelper2.Builder()
 	fmt.Println(dbHelper2.DB)
 	

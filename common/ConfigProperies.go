@@ -1,4 +1,4 @@
-package service
+package common
 
 import (
 	"fmt"
@@ -11,6 +11,7 @@ Config struct
 type Config struct{
 	Port int
 	Ip string
+	ImgrateMode string //up and down
 }
 
 
@@ -23,7 +24,8 @@ func GetConfig() Config {
 	p := properties.MustLoadFile("./resource/app.properties", properties.UTF8)
 	port := p.GetInt("app.port", 8080)
 	ip := p.GetString("app.ip", "localhost")
-	fmt.Println(port, ip)
-	return Config{Port: port, Ip: ip}
+	imgrateMode := p.GetString("imgrate.mode", "up")
+	fmt.Println(port, ip, imgrateMode)
+	return Config{Port: port, Ip: ip, ImgrateMode: imgrateMode}
 }
 

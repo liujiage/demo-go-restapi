@@ -5,7 +5,7 @@ import(
 	"github.com/liujiage/restapi/service"
 )
 
-func TestStart_test(t *testing.T) {
+func TestMain_main(t *testing.T) {
 	s := service.Say("jiage liu")
 	if !strings.Contains(s, "Hello") {
 		t.Fatalf("fail! %s", s)

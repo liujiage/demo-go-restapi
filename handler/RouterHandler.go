@@ -1,7 +1,7 @@
 package handler
 import (
 	"strconv"
-	"github.com/liujiage/restapi/service"
+	"github.com/liujiage/restapi/common"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,6 +24,6 @@ func Start(){
 	router.PUT(UPDATE_USER, UserUpdateById)
 	router.GET(QUERY_USER, UserQueryById)
     //get app config
-	config := service.GetConfig()
+	config := common.GetConfig()
 	router.Run(config.Ip + ":" +strconv.Itoa(config.Port))
 }

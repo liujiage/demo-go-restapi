@@ -1,62 +1,50 @@
 package service
-import(
+
+import (
 	"fmt"
+	"github.com/liujiage/restapi/service/dao"
 )
 
 /***
-User CRUD Interface
+User CRUD Interface. 
+Service level
 ***/
 type UserService interface{
 	UserAdd() int
-	UserDeleteById() int
-	UserUpdateById() int
-	UserQueryById()  User
+	UserMutiManage() int
 }
 
 /****
-User struct
+User struct. 
+Service level
 ****/
-type User struct{
-	Id string
-	Name string
+type UserModelService struct{
+	User dao.UserModelDao
 }
 
 /****
 Add a new user
 ****/
-func (user User) UserAdd() int{
+func (user UserModelService) UserAdd() int{
 	fmt.Println("UserAdd")
-	//TODO: save user into database 
+	user.User.UserAdd()
 	return 0
 }
 
 /****
-Delete a user by id
+Simulate Service level call more than one Dao services
 ****/
-func (user User) UserDeleteById() int{
-	fmt.Println("UserDeleteById")
-	//TODO: delete user by id from database
+func (user UserModelService) UserMutiManage() int{
+	fmt.Println("UserMutiManage")
+	//1. query user by id 
+    user.User.UserQueryById()
+	//2. update user by id 
+	user.User.UserUpdateById()
+	//3. delete the user by id 
+	user.User.UserDeleteById()
 	return 0
 }
 
-/****
-Update a user by id
-****/
-func (user User) UserUpdateById() int{
-	fmt.Println("UserUpdateById")
-	//TODO: update a user by id from database
-	return 0
-}
-
-/****
-Query a user by id
-****/
-func (user User) UserQueryById() User{
-    fmt.Println("UserQuery")
-	//TODO: query user by id from database
-	return User{}
-
-}
 
 /****
 Only for testing 
