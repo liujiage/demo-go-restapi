@@ -11,3 +11,7 @@ func main() {
 	fmt.Println(reply)
 	handler.Start()
 }
+
+func init() {
+     fmt.Println("call init().....")
+}
