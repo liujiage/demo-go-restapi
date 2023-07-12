@@ -13,7 +13,7 @@ type Product struct {
 	Price uint
 }
 
-func TestQuickStart(t *testing.T) {
+func TestQuick_create(t *testing.T) {
 
 	db, err := gorm.Open(sqlite.Open("./../../resource/test.db"), &gorm.Config{})
 	if err != nil {

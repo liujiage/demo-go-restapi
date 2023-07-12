@@ -20,8 +20,8 @@ User struct.
 Dao level
 ****/
 type UserModelDao struct{
-    Id string
-	Name string
+    Id string   `db:"id"`
+	Name string `db:"name"`
  
 }
 

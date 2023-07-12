@@ -12,7 +12,7 @@ import (
 Test sqlx 
 Reference: https://pkg.go.dev/github.com/jmoiron/sqlx#section-readme
 ***/
-func TestQuickStartSqlx(t *testing.T) {
+func TestSqlxQuick_create(t *testing.T) {
 
     var db *sqlx.DB
 	db, err := sqlx.Connect("sqlite3", "./../../resource/testSqlx.db")

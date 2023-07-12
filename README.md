@@ -15,8 +15,10 @@ user rquest -> handler
 
 common, database migration, load properties. 
 handler,  process user' reqeust, can call more then on services 
-service,  service, process a kind of task, include common and general services currently. in the future can split common service to a new package. 
+service,  service, process a kind of task, one service can be call more then one dao
+dao, access database, the model mapping database table type
 test, for unit test. the file name shuld be xxx_test.go, some demo for researching 
+
 
 2. testing in development 
 go run main.go
