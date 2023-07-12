@@ -9,7 +9,7 @@ import (
 func main() {
 	reply := service.Say("jiage liu")
 	fmt.Println(reply)
-	handler.Start()
+	handler.ServerStart()
 }
 
 func init() {

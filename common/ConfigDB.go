@@ -6,9 +6,8 @@ import (
 	"log"
 )
 
-
 type DBHelper struct {
-	DB *sqlx.DB
+	DB *sqlx.DB `container:"name"`
 }
 
 func (dbHelper *DBHelper) Builder() *DBHelper {

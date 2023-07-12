@@ -6,6 +6,7 @@ import (
 	"testing"
 	"github.com/liujiage/restapi/common"
 	"github.com/liujiage/restapi/service/dao"
+	"github.com/golobby/container/v3"
 	
 )
 
@@ -14,6 +15,12 @@ func TestDBHelper_connect(t *testing.T) {
 	dbHelper.Builder()
 	fmt.Println(dbHelper.DB)
 	
+}
+
+func TestDBHelper_connect_container(t *testing.T){
+	var dbHelper common.DBHelper
+	container.NamedResolve(&dbHelper, "db")
+    fmt.Println(dbHelper.DB)
 }
 
 func TestDBHelper_insert(t *testing.T) {
@@ -27,6 +34,12 @@ func TestDBHelper_delete(t *testing.T) {
 	dbHelper := common.DBHelper{}
 	sql := `delete from user where id = ?`
 	dbHelper.Builder().DB.MustExec(sql, 1)
+}
+
+func TestDBHelper_update(t *testing.T){
+	dbHelper := common.DBHelper{}
+	sql := `update user set name = ? where id = ?`
+	dbHelper.Builder().DB.MustExec(sql, "test_update", "2")
 }
 
 func TestDBHelper_query(t *testing.T) {

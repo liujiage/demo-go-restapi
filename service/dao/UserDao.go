@@ -2,6 +2,7 @@ package dao
 
 import (
 	"fmt"
+	"github.com/liujiage/restapi/common"
 )
 
 /***
@@ -31,7 +32,10 @@ Add a new user
 ****/
 func (user *UserModelDao) UserAdd() int{
 	fmt.Println("UserAdd from dao")
-	//TODO: save user into database 
+	dbHelper := common.DBHelper{}
+	sql := `insert into user(id,name) values(?,?)`
+	id := common.GetUUID()
+	dbHelper.Builder().DB.MustExec(sql, id, "test") 
 	return 0
 }
 

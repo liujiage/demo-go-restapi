@@ -17,7 +17,7 @@ const(
 /****
 Start api http server
 ****/
-func Start(){
+func ServerStart(){
 	router := gin.Default()
 	router.POST(ADD_USER, UserAdd)
 	router.DELETE(DELETE_USER, UserDeleteById)
