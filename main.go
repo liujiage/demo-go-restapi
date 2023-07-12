@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/liujiage/restapi/handler"
 	"github.com/liujiage/restapi/service"
 )
@@ -13,5 +14,5 @@ func main() {
 }
 
 func init() {
-     fmt.Println("call init().....")
+	fmt.Println("call init().....")
 }
