@@ -1,4 +1,4 @@
-package database_test
+package common_test
 
 import (
 	"log"

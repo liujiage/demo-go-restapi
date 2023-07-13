@@ -6,7 +6,10 @@ import(
  
 )
 
-var Instance = container.New()
+var (
+	Instance = container.New()
+	//todo define project root path
+)
 
 /****
 Inject object into container 
@@ -30,3 +33,4 @@ func GetDBConnect() *sqlx.DB{
     Instance.NamedResolve(&helper, "db")
 	return helper.GetConnect()
 }
+

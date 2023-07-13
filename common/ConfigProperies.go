@@ -5,6 +5,7 @@ import (
 	"github.com/magiconair/properties"
 )
 
+
 /****
 Config struct
 ****/
@@ -29,3 +30,4 @@ func GetConfig() Config {
 	return Config{Port: port, Ip: ip, ImgrateMode: imgrateMode}
 }
 
+ 

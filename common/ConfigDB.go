@@ -38,6 +38,7 @@ Connect connect database
 Private function
 ****/
 func  (model *DBModelHelper) connect() *sqlx.DB {
+	//todo change a const project root path
 	db, err := sqlx.Connect("sqlite3", "./../../resource/app.db")
 	if err != nil {
 		log.Fatalln(err)

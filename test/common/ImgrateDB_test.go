@@ -1,4 +1,4 @@
-package database
+package common_test
 
 import (
 	"testing"

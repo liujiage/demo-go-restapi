@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"github.com/liujiage/restapi/service/dao"
+	"github.com/liujiage/restapi/common"
 )
 
 /***
@@ -10,8 +11,8 @@ User CRUD Interface.
 Service level
 ***/
 type UserService interface{
-	UserAdd() int
-	UserMutiManage() int
+	UserAdd() string
+	UserMutiManage() string
 }
 
 /****
@@ -25,16 +26,16 @@ type UserModelService struct{
 /****
 Add a new user
 ****/
-func (user UserModelService) UserAdd() int{
+func (user UserModelService) UserAdd() string{
 	fmt.Println("UserAdd")
 	user.User.UserAdd()
-	return 0
+	return common.SUCCESS
 }
 
 /****
 Simulate Service level call more than one Dao services
 ****/
-func (user UserModelService) UserMutiManage() int{
+func (user UserModelService) UserMutiManage() string{
 	fmt.Println("UserMutiManage")
 	//1. query user by id 
     user.User.UserQueryById()
@@ -42,7 +43,7 @@ func (user UserModelService) UserMutiManage() int{
 	user.User.UserUpdateById()
 	//3. delete the user by id 
 	user.User.UserDeleteById()
-	return 0
+	return common.SUCCESS
 }
 
 

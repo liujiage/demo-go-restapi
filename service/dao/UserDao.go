@@ -10,9 +10,9 @@ User CRUD Interface.
 Dao level
 ***/
 type UserDao interface{
-	UserAdd() int
-	UserDeleteById() int
-	UserUpdateById() int
+	UserAdd() string
+	UserDeleteById() string
+	UserUpdateById() string
 	UserQueryById()  UserModelDao
 }
 
@@ -29,31 +29,32 @@ type UserModelDao struct{
 /****
 Add a new user
 ****/
-func (user *UserModelDao) UserAdd() int{
+func (user *UserModelDao) UserAdd() string{
 	fmt.Println("UserAdd from dao")
 	sql := `insert into user(id,name) values(?,?)`
-	id := common.GetUUID()
-	dbHelper := common.DBModelHelper{}
-	dbHelper.GetConnect().MustExec(sql, id, "test") 
-	return 0
+	//id := common.GetUUID()
+    common.GetDBConnect().MustExec(sql, user.Id, user.Name) 
+	return common.SUCCESS
 }
 
 /****
 Delete a user by id
 ****/
-func (user *UserModelDao) UserDeleteById() int{
+func (user *UserModelDao) UserDeleteById() string{
 	fmt.Println("UserDeleteById")
-	//TODO: delete user by id from database
-	return 0
+	sql := `delete from user where id=?`
+	common.GetDBConnect().MustExec(sql,user.Id)
+	return common.SUCCESS
 }
 
 /****
 Update a user by id
 ****/
-func (user *UserModelDao) UserUpdateById() int{
+func (user *UserModelDao) UserUpdateById() string{
 	fmt.Println("UserUpdateById")
-	//TODO: update a user by id from database
-	return 0
+	sql := "update user set name=? where id=?"
+	common.GetDBConnect().MustExec(sql,user.Name, user.Id)
+	return common.SUCCESS
 }
 
 /****
