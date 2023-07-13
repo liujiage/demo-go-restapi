@@ -7,46 +7,47 @@ import (
 	"github.com/liujiage/restapi/common"
 	"github.com/liujiage/restapi/service/dao"
 	"github.com/golobby/container/v3"
-	
+	"github.com/stretchr/testify/assert"
 )
 
+var instance = container.New()
+var dbHelper = common.DBModelHelper{}
 func TestDBHelper_connect(t *testing.T) {
-	dbHelper := common.DBHelper{}
-	dbHelper.Builder()
-	fmt.Println(dbHelper.DB)
-	
+	fmt.Println(dbHelper.GetConnect())
 }
 
 func TestDBHelper_connect_container(t *testing.T){
-	var dbHelper common.DBHelper
-	container.NamedResolve(&dbHelper, "db")
-    fmt.Println(dbHelper.DB)
+    instance.NamedSingleton("db", func() common.DBHelper {
+		//inital connect to database
+		dbHelper.GetConnect();
+		return &dbHelper
+	})
+	var helper common.DBHelper
+    err := instance.NamedResolve(&helper, "db")
+	assert.NoError(t, err)
+	assert.Equal(t, helper.GetConnect(), dbHelper.GetConnect())
 }
 
 func TestDBHelper_insert(t *testing.T) {
-	dbHelper := common.DBHelper{}
 	sql := `insert into user(id,name) values(?,?)`
 	id := common.GetUUID()
-	dbHelper.Builder().DB.MustExec(sql, id, "test")
+	dbHelper.GetConnect().MustExec(sql, id, "test")
 }
 
 func TestDBHelper_delete(t *testing.T) {
-	dbHelper := common.DBHelper{}
 	sql := `delete from user where id = ?`
-	dbHelper.Builder().DB.MustExec(sql, 1)
+	dbHelper.GetConnect().MustExec(sql, 1)
 }
 
 func TestDBHelper_update(t *testing.T){
-	dbHelper := common.DBHelper{}
 	sql := `update user set name = ? where id = ?`
-	dbHelper.Builder().DB.MustExec(sql, "test_update", "2")
+	dbHelper.GetConnect().MustExec(sql, "test_update", "2")
 }
 
 func TestDBHelper_query(t *testing.T) {
-	dbHelper := common.DBHelper{}
 	sql := `select id as Id, name as Name from user limit 10 `
 	var users []dao.UserModelDao
-	rows, err:= dbHelper.Builder().DB.Queryx(sql)
+	rows, err:= dbHelper.GetConnect().Queryx(sql)
 	if err != nil {
 		fmt.Println(err)
 		return 
@@ -64,10 +65,9 @@ func TestDBHelper_query(t *testing.T) {
 }
 
 func TestDBHelper_query_scan(t *testing.T){
-	dbHelper := common.DBHelper{}
 	sql := `select id, name from user limit 10 `
 	users := make([]dao.UserModelDao,0)
-	rows, err:= dbHelper.Builder().DB.Queryx(sql)
+	rows, err:= dbHelper.GetConnect().Queryx(sql)
 	if err != nil {
 		fmt.Println(err)
 		return 

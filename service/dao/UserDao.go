@@ -23,7 +23,6 @@ Dao level
 type UserModelDao struct{
     Id string   `db:"id"`
 	Name string `db:"name"`
- 
 }
 
 
@@ -32,10 +31,10 @@ Add a new user
 ****/
 func (user *UserModelDao) UserAdd() int{
 	fmt.Println("UserAdd from dao")
-	dbHelper := common.DBHelper{}
 	sql := `insert into user(id,name) values(?,?)`
 	id := common.GetUUID()
-	dbHelper.Builder().DB.MustExec(sql, id, "test") 
+	dbHelper := common.DBModelHelper{}
+	dbHelper.GetConnect().MustExec(sql, id, "test") 
 	return 0
 }
 
