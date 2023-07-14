@@ -30,4 +30,5 @@ iwr -useb get.scoop.sh | iex
 scoop install migrate
 migrate create -ext sql -dir database/migration/ -seq init_mg
 https://github.com/golang-migrate/migrate/tree/master/database/sqlite3
+
 </PRE>
